@@ -6,9 +6,9 @@ Estimate of time needed to complete: 2.5 hours
 
 Start time: 5/8/19 7pm
 
-Finish time: _____
+Finish time: 5/8/19 930pm 
 
-Actual time needed to complete: _____
+Actual time needed to complete: 2.5 hours
 
 
 Number and name of feature: ________________________________
