@@ -1,12 +1,15 @@
 'use strict';
 
+
+require('dotenv').config();
+
 // Application Dependencies
 const express = require('express');
 const superagent = require('superagent');
 
 // Application Setup
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 
 // Application Middleware
 app.use(express.urlencoded({ extended: true }));
@@ -30,9 +33,12 @@ app.listen(PORT, () => console.log(`Listening on port: ${PORT}`));
 // HELPER FUNCTIONS
 // Only show part of this to get students started
 function Book(info) {
+  // console.log(info);
   const placeholderImage = 'https://i.imgur.com/J5LVHEL.jpg';
-  this.title = info.title || 'No title available';
-console.log(info)
+  this.title = info.volumeInfo.title || 'No title available';
+  this.author = info.volumeInfo.authors || 'Author Not Avaliable';
+  this.description = info.volumeInfo.description || 'No Description, Sorry.';
+  this.image = info.volumeInfo.imageLinks.thumbnail || placeholderImage;
 }
 
 
@@ -55,9 +61,9 @@ function createSearch(request, response) {
   // response.sendFile('');
 
   superagent.get(url)
-    .then(apiResponse => apiResponse.body.items.map(bookResult => new Book(bookResult.volumeInfo)))
+    .then(apiResponse => apiResponse.body.items.map(bookResult => new Book(bookResult)))
     .then(results => response.render('pages/searches/show', { searchResults: results }));
-    // console.log(bookResult)
+  // console.log(bookResult)
 
   // how will we handle errors?
 }
