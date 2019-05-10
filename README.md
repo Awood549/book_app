@@ -11,33 +11,33 @@ Finish time: 5/8/19 930pm
 Actual time needed to complete: 2.5 hours
 
 
-Number and name of feature: ________________________________
+Number and name of feature: Build Constructor
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: 1 hour
 
-Start time: _____
+Start time: 5/9/19 615pm
 
-Finish time: _____
+Finish time: 5/9/19 700pm
 
-Actual time needed to complete: _____
-
-
-Number and name of feature: ________________________________
-
-Estimate of time needed to complete: _____
-
-Start time: _____
-
-Finish time: _____
-
-Actual time needed to complete: _____
+Actual time needed to complete: 45 mins
 
 
-Number and name of feature: ________________________________
+Number and name of feature: Error Page
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: 1 hour
 
-Start time: _____
+Start time: 5/9/19 730pm
+
+Finish time: 5/9/19 800pm
+
+Actual time needed to complete: 30 mins
+
+
+Number and name of feature: Basic CSS
+
+Estimate of time needed to complete: 2 Hours
+
+Start time: 5/9/19 815pm
 
 Finish time: _____
 
