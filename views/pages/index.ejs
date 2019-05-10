@@ -1,31 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Collection</title>
-    <link href="../../public/styles/reset.css" ref="stylesheet">
-    <link href="../../public/styles/base.css">
-    <link href="../../public/styles/icons.css">
-    <link href="../../public/styles/layout.css">
-    <link href="../../public/styles/modules.css">
+    <link href="../styles/reset.css" rel="stylesheet">
+    <link href="../styles/base.css" rel="stylesheet">
+    <link href="../styles/icons.css" rel="stylesheet">
+    <link href="../styles/layout.css" rel="stylesheet">
+    <link href="../styles/modules.css" rel="stylesheet">
   </head>
   <body>
     <main>
       <h4>Search by Title or Author</h4>
+      <ul>
+        <li>
       <form action="/searches" method="post">
-        <input type="text" name="search" placeholder="Enter a title or author" required>
+        <input type="text" name="search" placeholder="Enter a title or author" required></li>
+        <li>
         <fieldset>
           <label for="title">
             <span>Title</span>
             <input type="radio" name="search" value="title" required>
           </label>
         </fieldset>
+        </li>
+        <li>
         <fieldset>
           <label for="author">
             <span>Author</span>
             <input type="radio" name="search" value="author" required>
           </label>
         </fieldset>
+        </li>
+        <li>  
         <button type="submit">Search the Google Books API</button>
+        </li>
       </form>
     </main>
   </body>
