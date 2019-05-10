@@ -30,6 +30,12 @@ app.get('*', (request, response) => response.status(404).send('This route does n
 
 app.listen(PORT, () => console.log(`Listening on port: ${PORT}`));
 
+//Error Handler!
+function handleError(err, res) {
+  console.error(err);
+  if (res) res.render('pages/error');
+}
+
 // HELPER FUNCTIONS
 // Only show part of this to get students started
 function Book(info) {
@@ -62,8 +68,6 @@ function createSearch(request, response) {
 
   superagent.get(url)
     .then(apiResponse => apiResponse.body.items.map(bookResult => new Book(bookResult)))
-    .then(results => response.render('pages/searches/show', { searchResults: results }));
-  // console.log(bookResult)
-
-  // how will we handle errors?
+    .then(results => response.render('pages/searches/show', { searchResults: results }))
+    .catch(err => {handleError(err,response)});
 }
