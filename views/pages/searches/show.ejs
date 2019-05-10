@@ -9,7 +9,13 @@
 
   <ul>
     <% searchResults.forEach(item => { %>
-    <li><%= item %></li>
+    <li>
+      <img src=<%= item.image %>>
+      <%= item.title %> 
+      <strong>By:</strong> 
+      <%= item.author %>
+      <%= item.description %>
+    </li>
     <% }); %>
     
   </ul>
