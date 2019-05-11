@@ -37,7 +37,7 @@ function handleError(err, res) {
 }
 
 // HELPER FUNCTIONS
-// Only show part of this to get students started
+
 function Book(info) {
   // console.log(info);
   const placeholderImage = 'https://i.imgur.com/J5LVHEL.jpg';

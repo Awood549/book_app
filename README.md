@@ -39,9 +39,9 @@ Estimate of time needed to complete: 2 Hours
 
 Start time: 5/9/19 815pm
 
-Finish time: _____
+Finish time: 5/9/19 930pm
 
-Actual time needed to complete: _____
+Actual time needed to complete: 1.25 hours
 
 
 **Author**: Austin Wood, Chance Harmon
