@@ -1,0 +1,16 @@
+h1{
+  background: black;
+  color:white;
+}
+
+ul li:first-child{
+  background: white;
+  color: black;
+  width:100%;
+  padding: 13px 10px;
+  }
+
+ul li:last-child{
+  padding: 0px;
+  }
+  
