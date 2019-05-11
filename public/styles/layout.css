@@ -1,0 +1,19 @@
+h4 {
+  display: block;
+}
+
+ul{
+  display: block;
+  height: 100%;
+}
+
+img{
+  text-align: center;
+  margin: 0 auto;
+  display: block;
+}
+
+li{
+  display: block;
+  margin: 20px 0px;
+}

@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html>
 
-<head></head>
+<head>
+  <link href="../styles/reset.css" rel="stylesheet">
+  <link href="../styles/base.css" rel="stylesheet">
+  <link href="../styles/icons.css" rel="stylesheet">
+  <link href="../styles/layout.css" rel="stylesheet">
+  <link href="../styles/modules.css" rel="stylesheet">
+</head>
 
 <body>
   <h1>Books by </h1>
@@ -11,10 +17,9 @@
     <% searchResults.forEach(item => { %>
     <li>
       <img src=<%= item.image %>>
-      <%= item.title %> 
-      <strong>By:</strong> 
-      <%= item.author %>
-      <%= item.description %>
+     <h3> <%= item.title %> </h3>
+      <i><%= item.author %></i>
+      <p><%= item.description %></p>
     </li>
     <% }); %>
     
