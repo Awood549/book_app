@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <%- include('../../layout/head') %>
+</head>
+
+<body>
+   
+  <main>
+    <!-- sub navigation -->
+
+    <ul class="subnav">
+        <li>
+          <i class="fas fa-search"></i>
+          <a href="/new">Search</a>
+        </li>
+        <li>
+            <i class="fas fa-book-open"></i>
+          <a href="/">Shelf</a>
+        </li>
+      </ul>
+      <!-- end subnav -->
+  <h1><%= searchResults.length %> Book Results</h1>
+
+  <ul>
+    <% searchResults.forEach(item => { %>
+    <li>
+      <img src=<%= item.image %>>
+     <h3> <%= item.title %> </h3>
+      <i><%= item.author %></i>
+      <p><%= item.description %></p>
+    </li>
+    <% }); %>
+    
+  </ul>
+</main>
+</body>
+
+</html>

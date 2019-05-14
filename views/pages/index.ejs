@@ -1,18 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Collection</title>
-    <link href="../styles/reset.css" rel="stylesheet">
-    <link href="../styles/base.css" rel="stylesheet">
-    <link href="../styles/icons.css" rel="stylesheet">
-    <link href="../styles/layout.css" rel="stylesheet">
-    <link href="../styles/modules.css" rel="stylesheet">
+      <%- include('./layouts/head') %>
   </head>
   <body>
+    <%- include('../layout/header') %>
     <main>
-      <span> <!--this will be for the "my books section-->
-      </span>
+      <h4>Saved Books</h4>
+      <p><%= books.length %> Books in the Collection</p>
       <h4>Search by Title or Author</h4>
       <ul>
         <li>
