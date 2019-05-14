@@ -17,6 +17,7 @@ ul{
 li{
   background: #888;
   padding: 10px;
+  overflow: hidden;
 }
 
 button {
@@ -35,6 +36,9 @@ i{
   display: block;
   margin: 15 auto;
 }
-p{
+.description{
   padding:25px;
+  overflow-y: scroll;
+  width:80%;
+  height: 150px;
 }

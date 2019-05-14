@@ -11,6 +11,11 @@ const superagent = require('superagent');
 const app = express();
 const PORT = process.env.PORT;
 
+//DB setup
+const client = new pg.Client(process.env.DATABASE_URL);
+client.connect();
+client.on('error', err => console.error(err));
+
 // Application Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('./public'));
@@ -21,6 +26,7 @@ app.set('view engine', 'ejs');
 // API Routes
 // Renders the search form
 app.get('/', newSearch);
+app.get('/myBooks', getBooks);
 
 // Creates a new search to the Google Books API
 app.post('/searches', createSearch);
@@ -37,7 +43,6 @@ function handleError(err, res) {
 }
 
 // HELPER FUNCTIONS
-// Only show part of this to get students started
 function Book(info) {
   // console.log(info);
   const placeholderImage = 'https://i.imgur.com/J5LVHEL.jpg';
@@ -47,7 +52,15 @@ function Book(info) {
   this.image = info.volumeInfo.imageLinks.thumbnail || placeholderImage;
 }
 
-
+function getBooks(request,response){
+  let SQL = 'SELECT * FROM books;';
+  return client.query(SQL)
+    .then(results => {
+      console.log(results.rows);
+      response.render('myBooks' , {results: results.rows })
+    })
+    .catch(handleError);
+}
 // Note that .ejs file extension is not required
 function newSearch(request, response) {
   response.render('pages/index');
@@ -63,7 +76,7 @@ function createSearch(request, response) {
   if (request.body.search[1] === 'title') { url += `+intitle:${request.body.search[0]}`; }
   if (request.body.search[1] === 'author') { url += `+inauthor:${request.body.search[0]}`; }
 
-  console.log(url);
+  // console.log(url);
   // response.sendFile('');
 
   superagent.get(url)

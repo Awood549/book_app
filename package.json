@@ -1,10 +1,11 @@
 {
   "name": "bookapp",
   "version": "1.0.0",
-  "description": "",
+  "description": "Number and name of feature: 1. As a user, I want my application to load quickly so that I have an enjoyable experience.",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,8 @@
     "dotenv": "^8.0.0",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
+    "pg": "^7.11.0",
     "superagent": "^5.0.5"
-  }
+  },
+  "devDependencies": {}
 }
