@@ -6,6 +6,7 @@ require('dotenv').config();
 // Application Dependencies
 const express = require('express');
 const superagent = require('superagent');
+const pg = require('pg');
 
 // Application Setup
 const app = express();
@@ -18,12 +19,27 @@ app.use(express.static('./public'));
 // Set the view engine for server-side templating
 app.set('view engine', 'ejs');
 
+//Connect to Database
+const client = new pg.Client(process.env.DATABASE_URL);
+client.connect();
+client.on('error', err => console.log(err));
+
 // API Routes
 // Renders the search form
 app.get('/', newSearch);
 
 // Creates a new search to the Google Books API
 app.post('/searches', createSearch);
+
+app.get('/', getBooks);
+
+// app.get('/searches/:save_id', saveOneBook);
+
+app.get('/details/:detail_id', viewDetails);
+
+// locahost:3000/books/1
+app.get('/books/:book_id', getOneBook);
+
 
 // Catch-all
 app.get('*', (request, response) => response.status(404).send('This route does not exist'));
@@ -44,8 +60,34 @@ function Book(info) {
   this.title = info.volumeInfo.title || 'No title available';
   this.author = info.volumeInfo.authors || 'Author Not Avaliable';
   this.description = info.volumeInfo.description || 'No Description, Sorry.';
+  this.identifier = info.volumeInfo.industryIdentifiers[0].identifier || 'No identifier';
   this.image = info.volumeInfo.imageLinks.thumbnail || placeholderImage;
 }
+
+
+  // Get the Data and Return
+
+  function getBooks(request, response){
+    let SQL = 'SELECT * FROM books;';
+    return client.query(SQL)
+      .then(results => {
+        response.render('pages/searches/show', { results: results.rows })
+      })
+      .catch(handleError);
+  }
+  
+  function getOneBook(request, response) {
+  
+    let SQL = 'SELECT * FROM books WHERE id=$1;';
+    let values = [request.params.book_id];
+  
+    return client.query(SQL, values)
+      .then(result => {
+        return response.render('pages/index', { results: result.rows[0] });
+      })
+      .catch(err => handleError(err, response));
+  }
+ 
 
 
 // Note that .ejs file extension is not required
@@ -70,4 +112,14 @@ function createSearch(request, response) {
     .then(apiResponse => apiResponse.body.items.map(bookResult => new Book(bookResult)))
     .then(results => response.render('pages/searches/show', { searchResults: results }))
     .catch(err => {handleError(err,response)});
+}
+
+function viewDetails(request, response) {
+  let isbn = request.params.detail_id;
+  let url = `https://www.googleapis.com/books/v1/volumes?q=+isbn${isbn}`;
+  superagent.get(url)
+    .then(isbnResult => {
+      let bookDetail = new Book(isbnResult.body.items[0].volumeInfo);
+      response.render('pages/books/detail', { results: [bookDetail] });
+    });
 }

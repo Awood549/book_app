@@ -1,0 +1,12 @@
+<ul>
+  <% results.forEach(bookInfo => { %>
+<div>
+  <li class="img"><img src='<%= bookInfo.image_url %>' /></li>
+  <li class="title"><%= bookInfo.title %></li>
+  <li class="author"><%= bookInfo.author %></li>
+  <button type="button" onclick="alert('Hello world!')">View Details</button>
+  <li><%= bookInfo.isbn %></li>
+  <li class="description"><%= bookInfo.description %></li>
+</div>
+  <% }); %>
+</ul>
