@@ -87,7 +87,7 @@ function getBookshelves() {
 }
 // Note that .ejs file extension is not required
 function newSearch(request, response) {
-  response.render('pages/index');
+  response.render('pages/searches/new');
 }
 
 function createBook(request, response){
