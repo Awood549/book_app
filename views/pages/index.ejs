@@ -8,31 +8,17 @@
     <main>
       <h4>Saved Books</h4>
       <p><%= books.length %> Books in the Collection</p>
-      <h4>Search by Title or Author</h4>
-      <ul>
-        <li>
-      <form action="/searches" method="post">
-        <input type="text" name="search" placeholder="Enter a title or author" required></li>
-        <li>
-        <fieldset>
-          <label for="title">
-            <span>Title</span>
-            <input type="radio" name="search" value="title" required>
-          </label>
-        </fieldset>
+      <ul id="book-list">
+        <% books.forEach(book => %>
+        <li class="book-items" data-book-id="<%=
+        book.id %>">
+        <%- include('book/detai', {book: book}) %>
+        <p class="detail-button"><a href="/books/<%=
+        book.id %>">View Deatils</a></p>
         </li>
-        <li>
-        <fieldset>
-          <label for="author">
-            <span>Author</span>
-            <input type="radio" name="search" value="author" required>
-          </label>
-        </fieldset>
-        </li>
-        <li>  
-        <button type="submit">Search the Google Books API</button>
-        </li>
-      </form>
+        <% ) %>
+      </ul>
+     
     </main>
   </body>
 </html>

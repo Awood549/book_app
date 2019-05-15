@@ -66,7 +66,7 @@ function getBooks(request, response) {
       if(results.rows.rowCount === 0) {
         response.render('pages/searches/new');
       } else{
-        response.render('pages/index', { results: results.rows });
+        response.render('pages/index', { books: results.rows });
       }})
     .catch(err => handleError(err,response));
 }
@@ -88,7 +88,7 @@ function getBookshelves() {
 }
 // Note that .ejs file extension is not required
 function newSearch(request, response) {
-  response.render('pages/index');
+  response.render('pages/searches/new');
 }
 
 function createBook(request, response){
@@ -122,9 +122,9 @@ function createSearch(request, response) {
   }
 
   superagent.get(url)
-    .then(apiResponse => apiResponse.body.items.map(bookResult => new Book(bookResult))
+    .then(apiResponse => apiResponse.body.items.map(bookResult => new Book(bookResult.volumeInfo))
     )
-    .then(results => response.render('pages/searches/show', { searchResults: results })
+    .then(results => response.render('pages/searches/show', { results: results })
     )
     .catch(err => {handleError(err, response);
     });
