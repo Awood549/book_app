@@ -17,3 +17,6 @@ li{
   display: block;
   margin: 20px 0px;
 }
+.hide-me{
+  display: none;
+}
