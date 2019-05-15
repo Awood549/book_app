@@ -1,12 +1,21 @@
-<ul>
-  <% results.forEach(bookInfo => { %>
-<div>
-  <li class="img"><img src='<%= bookInfo.image_url %>' /></li>
-  <li class="title"><%= bookInfo.title %></li>
-  <li class="author"><%= bookInfo.author %></li>
-  <button type="button" onclick="alert('Hello world!')">View Details</button>
-  <li><%= bookInfo.isbn %></li>
-  <li class="description"><%= bookInfo.description %></li>
-</div>
-  <% }); %>
-</ul>
+<section class="book-container detail-view">
+  <img src="<%= book.image %>">
+  <h3>
+    <%= book.title %><% if (book.subtitle) { %> : <%= book.subtitle %> <% } %>
+  </h3>
+  <span>
+    <% book.author %>
+  </span>
+  <p class="desc">
+    <% book.description %>
+  </p>
+  <p class="isbn">
+    <%= book.isbn %>
+    <% if (book.bookshelf) { %>
+    &mdash;
+  Bookshelf:
+<% book.bookshelf %>
+<% } %>
+  </p>
+</section>
+
