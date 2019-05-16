@@ -14,3 +14,7 @@ ul li:last-child{
   padding: 0px;
   }
   
+  .hide-me{
+    display: none;
+  }
+  
