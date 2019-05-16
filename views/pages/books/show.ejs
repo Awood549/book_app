@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-      <%- include('../layout/head') %>
+      <%- include('../../layout/head') %>
   </head>
   <body>
-    <%- include('../layout/header') %>
+    <%- include('../../layout/header') %>
     <main>
         <ul>
-            <% searchResults.forEach(item => { %>
+            <% books.forEach(item => { %>
             <li>
               <img src=<%= item.image %>>
              <h3> <%= item.title %> </h3>
