@@ -6,6 +6,15 @@
   <body>
     <%- include('../layout/header') %>
     <main>
-      
+        <ul>
+            <% searchResults.forEach(item => { %>
+            <li>
+              <img src=<%= item.image %>>
+             <h3> <%= item.title %> </h3>
+              <i><%= item.author %></i>
+              <p><%= item.description %></p>
+            </li>
+            <% }); %>
+          </ul>
     </main>
 </html>

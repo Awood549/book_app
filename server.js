@@ -47,10 +47,11 @@ function handleError(err, res) {
 
 // HELPER FUNCTIONS
 function Book(info) {
+  // console.log(info)
   const placeholderImage = 'https://i.imgur.com/J5LVHEL.jpg';
   this.title = info.volumeInfo.title || 'No title available';
   this.author = info.volumeInfo.authors || 'Author Not Avaliable';
-  this.isbn = info.volumeInfo.industryIdentifiers || 'No ISBN available';
+  this.isbn = info.volumeInfo.industryIdentifiers[0].identifier || info.volumeInfo.industryIdentifiers[1].identifier || 'No ISBN available';
   this.description = info.volumeInfo.description || 'No Description, Sorry.';
   this.id = info.volumeInfo.industryIdentifiers[0].identifier || '';
   this.image = info.volumeInfo.imageLinks.thumbnail || placeholderImage;
@@ -96,7 +97,7 @@ function createBook(request, response){
   let {title,author,isbn,image,description} =request.body;
   let SQL = 'INSERT INTO books(title, author, isbn, image, description, bookshelf) VALUES($1, $2, $3, $4, $5, $6);';
   let values = [title,author,isbn,image,description,bookshelf];
-
+  console.log('SHIT WORKS');
   return client.query(SQL,values)
     .then(() => {
       SQL = 'SELECT * FROM books WHERE isbn=$1;';
