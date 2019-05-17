@@ -151,7 +151,6 @@ function viewDetails(request, response) {
 
 function updateDetails(request, response){
   let SQL = 'SELECT * FROM books';
-  console.log('WERE HEERE BETCHES..............')
   client.query(SQL)
     .then(results => {
       console.log(results)
