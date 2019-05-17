@@ -1,11 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-      <%- include('../layout/head') %>
+      <%- include('../../layout/head') %>
   </head>
   <body>
-    <%- include('../layout/header') %>
+    <%- include('../../layout/header') %>
     <main>
-      
+        <ul>
+            <li>
+              <img src=<%= book.image %>>
+             <h3> <%= book.title %> </h3>
+              <i><%= book.author %></i>
+              <p><%= book.description %></p>
+              <p><%= book.bookshelf %> </p>
+              <form method="POST" action="books/">
+                <%- include('../../layout/edit', {book: book}) %>
+                
+                <select>
+                  <% bookshelves.forEach( shelf => { %>
+                  <option><%= shelf.bookshelf %></option>
+                  <% }) %>
+                </select>
+                <button> Update Details </button>
+              </form>
+            </li>
+          </ul>
     </main>
+    <%- include('../../layout/footer') %>
 </html>

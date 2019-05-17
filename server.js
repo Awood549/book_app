@@ -6,6 +6,7 @@ require('dotenv').config();
 const express = require('express');
 const superagent = require('superagent');
 const pg = require('pg');
+const methodOverride = require('method-override');
 
 // Application Setup
 const app = express();
@@ -19,6 +20,14 @@ client.on('error', err => console.error(err));
 // Application Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('./public'));
+app.use(methodOverride((request,response) => {
+  if(request.body && typeof request.body === 'object' && '_method' in request.body){
+    //look in the url encoded POST body and delete correct method
+    let method = request.body._method;
+    delete request.body._method;
+    return method;
+  }
+}));
 
 // Set the view engine for server-side templating
 app.set('view engine', 'ejs');
@@ -31,6 +40,7 @@ app.get('/searches/new', newSearch);
 app.post('/books', createBook);
 app.get('/books/:id', getOneBook);
 app.get('/details/:detail_id', viewDetails);
+app.put('books/:id', updateDetails);
 
 // Catch-all
 app.get('*', (request, response) =>
@@ -47,10 +57,11 @@ function handleError(err, res) {
 
 // HELPER FUNCTIONS
 function Book(info) {
+  // console.log(info)
   const placeholderImage = 'https://i.imgur.com/J5LVHEL.jpg';
   this.title = info.volumeInfo.title || 'No title available';
   this.author = info.volumeInfo.authors || 'Author Not Avaliable';
-  this.isbn = info.volumeInfo.industryIdentifiers || 'No ISBN available';
+  this.isbn = info.volumeInfo.industryIdentifiers[0].identifier || info.volumeInfo.industryIdentifiers[1].identifier || 'No ISBN available';
   this.description = info.volumeInfo.description || 'No Description, Sorry.';
   this.id = info.volumeInfo.industryIdentifiers[0].identifier || '';
   this.image = info.volumeInfo.imageLinks.thumbnail || placeholderImage;
@@ -71,10 +82,11 @@ function getBooks(request, response) {
 }
 
 function getOneBook(request, response) {
-  getBookshelves() //to be used in the future
+  getBookshelves()
     .then(shelves => {
       let SQL = 'SELECT * FROM books WHERE id=$1;';
       let values = [request.params.id];
+      console.log(shelves.rows);
       client.query(SQL, values)
         .then(result => response.render('pages/books/show', { book: result.rows[0], bookshelves: shelves.rows }))
         .catch(err => handleError(err, response));
@@ -85,7 +97,7 @@ function getBookshelves() {
   let SQL = 'SELECT DISTINCT bookshelf FROM books ORDER BY bookshelf;';
   return client.query(SQL);
 }
-// Note that .ejs file extension is not required
+
 function newSearch(request, response) {
   response.render('pages/searches/new');
 }
@@ -96,7 +108,6 @@ function createBook(request, response){
   let {title,author,isbn,image,description} =request.body;
   let SQL = 'INSERT INTO books(title, author, isbn, image, description, bookshelf) VALUES($1, $2, $3, $4, $5, $6);';
   let values = [title,author,isbn,image,description,bookshelf];
-
   return client.query(SQL,values)
     .then(() => {
       SQL = 'SELECT * FROM books WHERE isbn=$1;';
@@ -136,4 +147,13 @@ function viewDetails(request, response) {
     let bookDetail = new Book(isbnResult.body.items[0].volumeInfo);
     response.render('pages/books/detail', { results: [bookDetail] });
   });
+}
+
+function updateDetails(request, response){
+  let SQL = 'SELECT * FROM books';
+  console.log('WERE HEERE BETCHES..............')
+  client.query(SQL)
+    .then(results => {
+      console.log(results)
+    })
 }
