@@ -13,7 +13,18 @@
               <i><%= book.author %></i>
               <p><%= book.description %></p>
               <p><%= book.bookshelf %> </p>
+              <form method="POST" action="books/">
+                <%- include('../../layout/edit', {book: book}) %>
+                
+                <select>
+                  <% bookshelves.forEach( shelf => { %>
+                  <option><%= shelf.bookshelf %></option>
+                  <% }) %>
+                </select>
+                <button> Update Details </button>
+              </form>
             </li>
           </ul>
     </main>
+    <%- include('../../layout/footer') %>
 </html>

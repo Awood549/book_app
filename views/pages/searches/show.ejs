@@ -13,20 +13,10 @@
           <button class="select-button">Select This Book</button>
           
           <form class="hide-me" action="/books" method="post">
-            <input type="text" name="title" value="<%=
-            book.title %>" required>
-            <input type="text" name="author" value="<%=
-            book.author %>" required>
-            <input type="text" name="isbn" value="<%=
-            book.isbn %>">
-            <input type="text" name="image" value="<%=
-            book.image %>">
-            <textarea name="description" value="<%=
-            book.description %>" cols="30" rows="5'">
-            <%= book.description %></textarea>
+            <%- include('../../layout/edit', {book:book}) %>
             <p>Enter a bookshelf name</p>
             <input type="text" name="bookshelf" required>
-            <button id="show-me" type="submit">Add to Database</button>
+            <button type="submit">Add to Database</button>
           </form>
         </li>
           <% }) %>
