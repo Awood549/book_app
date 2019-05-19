@@ -40,7 +40,8 @@ app.get('/searches/new', newSearch);
 app.post('/books', createBook);
 app.get('/books/:id', getOneBook);
 app.get('/details/:detail_id', viewDetails);
-app.put('books/:id', updateDetails);
+app.put('/books:id',updateDetails);
+
 
 // Catch-all
 app.get('*', (request, response) =>
@@ -57,7 +58,6 @@ function handleError(err, res) {
 
 // HELPER FUNCTIONS
 function Book(info) {
-  // console.log(info)
   const placeholderImage = 'https://i.imgur.com/J5LVHEL.jpg';
   this.title = info.volumeInfo.title || 'No title available';
   this.author = info.volumeInfo.authors || 'Author Not Avaliable';
@@ -86,7 +86,6 @@ function getOneBook(request, response) {
     .then(shelves => {
       let SQL = 'SELECT * FROM books WHERE id=$1;';
       let values = [request.params.id];
-      console.log(shelves.rows);
       client.query(SQL, values)
         .then(result => response.render('pages/books/show', { book: result.rows[0], bookshelves: shelves.rows }))
         .catch(err => handleError(err, response));
@@ -119,7 +118,7 @@ function createBook(request, response){
     .catch(err => handleError(err,response));
 }
 
-// Console.log request.body and request.body.search
+
 function createSearch(request, response) {
 
   let url = 'https://www.googleapis.com/books/v1/volumes?q=';
@@ -150,9 +149,11 @@ function viewDetails(request, response) {
 }
 
 function updateDetails(request, response){
-  let SQL = 'SELECT * FROM books';
-  client.query(SQL)
-    .then(results => {
-      console.log(results)
-    })
+  console.log(request.body);
+  let { title, author, isbn, description, bookshelf, image } = request.body;
+  const SQL = 'UPDATE books SET title=$1, author=$2, isbn=$3, description=$4, bookshelf=$5, image=$6, id=$7;';
+  const values = [title, author, isbn, description, bookshelf, image, request.params.book_id];
+  client.query(SQL, values)
+    .then(book => response.render(`./pages/searches/show`, {book: book }))
+    .catch(error => handleError(error, response));
 }
