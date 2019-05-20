@@ -1,32 +1,42 @@
 body {
-  width: 480px;
-  background-color: goldenrod;
+  background-image: url(../imgs/book-background.jpg);
   margin: 0 auto;
   text-align: center;
+  font-family: 'Noto Serif', serif;
 }
 
 h4 {
-  background: #333;
+  background: navajowhite;
+  border: 10px groove firebrick;
   padding: 10px;
 }
 
 ul{
   padding: 20px 40px;
-  background: #555;
+  background: navajowhite;
 }
 li{
-  background: #888;
+  /* background: firebrick; */
+  border: 10px ridge firebrick;
   padding: 10px;
+  background: navajowhite;
+}
+h1{
+  background: black;
+  color:white;
+  font-family: 'Baloo Bhai', cursive;
+  font-size: 200%;
 }
 
 h3{
   display: block;
   margin:0 auto;
 }
-i{
-  display: block;
-  margin: 15 auto;
-}
 p{
   padding:25px;
+  /* background: */
 }
+        /* i{
+          display: block;
+          margin: 15 auto;
+        } */

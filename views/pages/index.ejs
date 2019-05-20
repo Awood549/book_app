@@ -6,15 +6,14 @@
   <body>
     <%- include('../layout/header') %>
     <main>
-      <h4>Saved Books:</h4>
-      <p><%= books.length %> Books in the Collection</p>
+      <h4>Books Saved:<%= books.length %></h4>
       <ul id="book-list">
         <% books.forEach(book => {%>
         <li class="book-items" data-book-id="<%=
         book.id %>">
         <%- include('books/detail', {book: book}) %>
         <p class="detail-button"><a href="/books/<%=
-        book.id %>">View Deatils</a></p>
+        book.id %>">View Details</a></p>
         </li>
         <% }) %>
       </ul>

@@ -12,8 +12,10 @@
              <h3> <%= book.title %> </h3>
               <i><%= book.author %></i>
               <p><%= book.description %></p>
-              <p><%= book.bookshelf %> </p>
-              <form method="POST" action="books/">
+              <p>Bookshelf: <%= book.bookshelf %> </p>
+              <form method="post" action="/books:id"> 
+                <input type="hidden" name="_method" value="put">
+
                 <%- include('../../layout/edit', {book: book}) %>
                 
                 <select>
@@ -21,7 +23,7 @@
                   <option><%= shelf.bookshelf %></option>
                   <% }) %>
                 </select>
-                <button> Update Details </button>
+                <button type="submit"> Update Details </button>
               </form>
             </li>
           </ul>
